@@ -1,3 +1,11 @@
+#player{
+    border: solid red;
+
+}
+#cactus{
+    border: solid red;
+
+}
 body{
     margin: 0;
 }
@@ -5,15 +13,15 @@ body{
 #board{
    background-color: blue;
     width: 100%;
-    height: 600px;
+    height: 500px;
     position: relative;
 }
 
 #player{
-width: 40px;
-height: 50px;
+    width: 60px;
+    height: 60px;
     position: absolute;
-    bottom: 290px;
+    bottom: 240px;
     left: 100px;
 }
 #player img{
@@ -34,7 +42,7 @@ height: 50px;
     background-repeat: repeat;
     background-position: 0 0;
     background-size: auto 100%;
-    animation: backgraoundMove 25s linear infinite;
+    animation: backgraoundMove 30s linear infinite;
     
 }
 
@@ -43,10 +51,10 @@ height: 50px;
 }
 @keyframes playerJump {
     0%{
-        bottom: 290px;
+        bottom: 240px;
     }
     45%,55%{
-        bottom: 390px;
+        bottom: 340px;
     }
 
     
@@ -61,3 +69,57 @@ height: 50px;
     }
 }
 
+#cactus{
+    position: absolute;
+    width: 50px;
+    height: 80px;
+    bottom: 245px;
+    right: 0;
+    animation: cactusMovement 2s linear infinite;
+}
+
+#cactus img{
+    max-width: 100%;
+    max-height: 100%;
+}
+
+@keyframes cactusMovement {
+    0%{
+        right: 0%;
+    }
+    100%{
+        right: 100%;
+    }
+}
+
+.scoreContainer{
+    text-align: center;
+    font-size: 50px;
+    margin-top: 20px;
+}
+.button.play{
+    border-style: solid;
+    border-width: 37px 0 37px 60px;
+}
+.button{
+    border: 0;
+    background: transparent;
+    box-sizing: border-box;
+    width: 0;
+    height: 74px;
+    border-color: transparent transparent transparent #202020;
+    transition: 1s all ease;
+    cursor: pointer;
+    border-style: double ;
+    border-width: 0px 0 0px 60px;
+}
+
+.button:hover{
+    border-color:transparent transparent transparent #404040 ;
+
+}
+
+.menu{
+    display: flex;
+    justify-content: center;
+}

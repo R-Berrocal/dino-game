@@ -2,19 +2,34 @@
 const player = document.getElementById("player");
 const cactus = document.getElementById("cactus");
 const background = document.getElementById("background");
+const reestarGame = document.getElementById("reestarGame")
+const board = document.getElementById("board")
 let scoreInterval;
 let score = 0;
 const buttonPlayStop = document.getElementById("buttonPlayStop");
 
 //creamos un evento de click para agregar una animacion con la clase llamada playerJump para hacer que salte el dino
-document.addEventListener("click", function () {
-  player.classList.add("playerJump");
+board.addEventListener("click", function () {
+  playerJump();
 });
 //quitamos la animacion que tiene player la quitamos con el evento animationend
 player.addEventListener("animationend", () => {
-  player.classList.remove("playerJump");
+    removeJump();
 });
+function removeJump(){
+    player.classList.remove("playerJump")
+}
+function playerJump(){
+    player.classList.add("playerJump");
 
+}
+
+function removeCactus(){
+    cactus.classList.remove("cactusMovement");
+}
+function placeCactus(){
+    cactus.classList.add("cactusMovement");
+}
 function pauseGame(){
     cactus.style.animationPlayState = "paused";
     player.style.animationPlayState = "paused";
@@ -45,6 +60,7 @@ buttonPlayStop.addEventListener("click", () => {
     
     if(buttonPlayStop.classList.contains("play")){
         resumeGame();
+        
     }else{
         pauseGame();
     }
@@ -58,14 +74,28 @@ scoreInterval= setInterval(() => {
   document.getElementById("score").innerText = score;
 }, 1000);
 
-const reestarGame = document.getElementById("reestarGame")
 
 reestarGame.addEventListener("click",restarGame);
 
 function restarGame(){
-    alert("Reestar game");
+    resetScore();
+    removeJump();
+    removeCactus()
+    void cactus.offsetWidth
+    placeCactus();
 }
 
 function resetScore(){
+    score=0;
+    document.getElementById("score").innerText=0;
     
 }
+
+document.addEventListener("keyup",(event)=>{
+    if(event.key=="ArrowUp"){
+        playerJump();
+    }
+    if(event.key.toLocaleLowerCase()=="w"){
+        playerJump();
+    }
+})

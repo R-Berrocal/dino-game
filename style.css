@@ -75,9 +75,10 @@ body{
     height: 80px;
     bottom: 245px;
     right: 0;
+}
+.cactusMovement{
     animation: cactusMovement 2s linear infinite;
 }
-
 #cactus img{
     max-width: 100%;
     max-height: 100%;

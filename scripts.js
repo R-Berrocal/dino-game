@@ -5,8 +5,10 @@ const background = document.getElementById("background");
 const reestarGame = document.getElementById("reestarGame")
 const board = document.getElementById("board")
 let scoreInterval;
+let interval;
 let score = 0;
 const buttonPlayStop = document.getElementById("buttonPlayStop");
+const Final =document.getElementById("final")
 
 //creamos un evento de click para agregar una animacion con la clase llamada playerJump para hacer que salte el dino
 board.addEventListener("click", function () {
@@ -50,6 +52,7 @@ function resumeScore(){
     scoreInterval= setInterval(() => {
         score++;
         document.getElementById("score").innerText = score;
+        
     }, 1000);
 }
 
@@ -60,7 +63,7 @@ buttonPlayStop.addEventListener("click", () => {
     
     if(buttonPlayStop.classList.contains("play")){
         resumeGame();
-        
+        Final.classList.remove("over")
     }else{
         pauseGame();
     }
@@ -72,6 +75,7 @@ buttonPlayStop.addEventListener("click", () => {
 scoreInterval= setInterval(() => {
   score++;
   document.getElementById("score").innerText = score;
+  
 }, 1000);
 
 
@@ -83,6 +87,9 @@ function restarGame(){
     removeCactus()
     void cactus.offsetWidth
     placeCactus();
+    
+   
+    
 }
 
 function resetScore(){
@@ -99,3 +106,35 @@ document.addEventListener("keyup",(event)=>{
         playerJump();
     }
 })
+
+function colision(etiqueta){
+    let x,y,ancho,alto;
+    ancho=etiqueta.getBoundingClientRect().left;
+    x=ancho+etiqueta.getBoundingClientRect().width;
+    alto=etiqueta.getBoundingClientRect().top;
+    y=alto+etiqueta.getBoundingClientRect().height;
+
+    return {
+
+        x ,y ,ancho,alto
+    }
+}
+
+function colisionDino(){
+    if((colision(player).x)>(colision(cactus).ancho)&&(colision(player).ancho)<(colision(cactus).x)&&(colision(player).y)>(colision(cactus).alto)){
+        cactus.style.animationPlayState = "paused";
+        player.style.animationPlayState = "paused";
+        background.style.animationPlayState = "paused";
+        stopScore();
+        restarGame();
+        buttonPlayStop.classList.toggle("play");
+        Final.classList.toggle("over")
+    } 
+
+}
+
+
+ interval=setInterval(()=>{
+     colisionDino();
+ },100);
+
